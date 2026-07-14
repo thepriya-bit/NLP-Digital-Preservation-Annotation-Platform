@@ -34,3 +34,6 @@ Task 4.1 (Riddhiman): Build the Dataset Export engine. Write the logic to query 
 Task 4.2 (Nandita): Implement the Admin Management Console UI, allowing administrators to manually ban toxic users, force-delete orphaned files, and trigger dataset exports.  
 
 Task 4.3 (Priya): Lead the QA phase. Write frontend tests, test edge cases (e.g., dropping the internet connection right after a Firebase upload but before the Postgres commit), and ensure mobile responsiveness.
+
+
+// This is the Task distribution allocated by Sanjeev Sir 
