@@ -1,0 +1,36 @@
+Task 1.1 (Riddhiman): Initialize the FastAPI backend and configure the PostgreSQL database. Implement the four core tables: Users, Raw_Phrases, Annotations, and Verifications.  
+
+Task 1.2 (Riddhiman & Nandita): Implement the JSONB column for syntax storage and successfully configure the GIN (Generalized Inverted Index) to prevent full table scans.
+
+Task 1.3 (Nandita): Develop the Automated QA Rule Engine. Create middle-ware scripts to reject non-Unicode (Latin) alphabet submissions for Assamese text and integrate a basic open-source toxicity filter.
+
+Task 1.4 (Priya): Initialize the React.js + TypeScript frontend repository and set up the foundational UI components and routing using Tailwind CSS. Define the API contracts (Swagger/OpenAPI) with Riddhiman.  
+
+Sprint 2: Core APIs & Distributed Storage (Weeks 1-2)
+Focus: Secure file handling, authentication, and core CRUD operations.
+
+Task 2.1 (Riddhiman): Implement the Distributed Transaction Workflow. Build the API endpoint that forces the frontend to upload audio to Firebase first, receives the URL, and then safely commits it to PostgreSQL. Write the cleanup script to delete orphaned Firebase files if the database commit fails.  
+
+Task 2.2 (Riddhiman): Implement JWT Authentication and Role-Based Access Control (RBAC) to differentiate between standard contributors, verifiers, and admins.  
+
+Task 2.3 (Nandita): Build the REST endpoints for submitting translations, fetching phrases, and processing syntax tagging.  
+
+Task 2.4 (Priya): Build the Contributor Dashboard UI, focusing on the interface where users will type translations and interact with the audio recording widget.  
+
+Sprint 3: The Contributor Interface & Verification Flow (Weeks 1-2)
+Focus: Connecting the frontend to the backend and building the human QA loop.
+
+Task 3.1 (Priya & Nandita): Connect the React frontend to the FastAPI backend using Axios. Ensure the audio recording widget successfully posts to Firebase and sends the secure URL back to the API.  
+
+Task 3.2 (Nandita): Build the frontend Review & Verification panel where authorized users can listen to audio or read translations and cast their +1 or -1 votes.  
+
+Task 3.3 (Riddhiman): Build the backend logic for the Verification table, ensuring that a user's trust_score updates based on the approval of their submissions.  
+
+Sprint 4: Dataset Export, AI Readiness, & Polish (Weeks 1-2)
+Focus: Data extraction, edge-case testing, and final deployment.
+
+Task 4.1 (Riddhiman): Build the Dataset Export engine. Write the logic to query the GIN-indexed JSONB data and export clean, verified datasets into CSV, JSON, and Parquet formats for AI/ML use.  
+
+Task 4.2 (Nandita): Implement the Admin Management Console UI, allowing administrators to manually ban toxic users, force-delete orphaned files, and trigger dataset exports.  
+
+Task 4.3 (Priya): Lead the QA phase. Write frontend tests, test edge cases (e.g., dropping the internet connection right after a Firebase upload but before the Postgres commit), and ensure mobile responsiveness.
