@@ -1,0 +1,19 @@
+Phase 1 Objectives for All Teams
+1. Understand the Domain: Research existing solutions, case studies, and technological limitations within your project area.
+2. Define the Architecture: Compare technological approaches and select the best paradigms for scale, speed, and accuracy.
+3. Produce a Formal Document: Your findings will be compiled into a structured Phase 1 Report, which will serve as the blueprint for your development phase.
+
+Team 1: NLP and Digital Preservation Annotation Platform
+Team Members: Riddhiman Puzari, Priya Saikia, Nandita Das
+
+Your project focuses on building a platform to digitize, annotate, and preserve low-resource regional languages, creating clean datasets for future AI and LLM integration.
+
+Key Research Areas
+1. The Landscape of Low-Resource Languages: Research the current challenges in digital preservation, specifically focusing on tokenization, syntax categorization, and data scarcity.
+2. Crowdsourcing & Annotation Models: Study existing platforms (e.g., Mozilla Common Voice) to understand how they gamify or incentivize users to submit and verify linguistic data.
+3. Dataset Structuring for AI: Investigate how linguistic data must be structured and stored in a database so it can be effectively exported and utilized to train machine learning models.
+
+Phase 1 Deliverables
+1. A comparative study of at least three existing language preservation or annotation platforms.
+2. A proposed database schema detailing how you will store phrases, translations, dialect metadata, and verification statuses.
+3. Your recommended full-stack technology stack for building a secure, user-friendly portal.
