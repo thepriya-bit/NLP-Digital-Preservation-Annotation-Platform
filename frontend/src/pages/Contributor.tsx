@@ -1,5 +1,7 @@
+import ContributorDashboard from "./ContributorDashboard";
+
 const Contributor = () => {
-  return <h1>Contributor Dashboard</h1>;
+  return <ContributorDashboard />;
 };
 
 export default Contributor;
