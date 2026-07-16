@@ -13,6 +13,7 @@ const AppRoutes = () => {
       <Route path="/login" element={<Login />} />
       <Route path="/dashboard" element={<Dashboard />} />
       <Route path="/contributor" element={<Contributor />} />
+      <Route path="/verify" element={<Contributor />} />
       <Route path="*" element={<NotFound />} />
     </Routes>
   );
