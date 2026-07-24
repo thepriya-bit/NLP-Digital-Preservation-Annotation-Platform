@@ -1,8 +1,9 @@
 from datetime import datetime
-from sqlalchemy import String, DateTime, Integer, Text
+from sqlalchemy import Boolean, DateTime, Integer, String
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from app.db.database import Base
+
 
 class User(Base):
     __tablename__ = "users"
@@ -13,6 +14,7 @@ class User(Base):
     password_hash: Mapped[str] = mapped_column(String(255), nullable=False)
     role: Mapped[str] = mapped_column(String(50), nullable=False, default="annotator")
     trust_score: Mapped[float] = mapped_column(nullable=False, default=0.0)
+    is_banned: Mapped[bool] = mapped_column(Boolean, default=False, nullable=False)
     created_at: Mapped[datetime] = mapped_column(DateTime, default=datetime.utcnow, nullable=False)
 
     raw_phrases: Mapped[list["RawPhrase"]] = relationship(back_populates="submitted_by_user")

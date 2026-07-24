@@ -1,0 +1,41 @@
+# Environment
+.env
+backend/.env
+frontend/.env
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+*.egg
+
+# Node
+node_modules/
+dist/
+build/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Audio uploads
+backend/uploads/
+
+# Firebase credentials (never commit!)
+*firebase-credential*.json
+*-service-account.json
+
+# Docker
+docker-compose.override.yml
+
+# Logs
+*.log
