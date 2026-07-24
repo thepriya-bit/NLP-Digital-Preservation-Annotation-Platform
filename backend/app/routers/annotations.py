@@ -52,9 +52,9 @@ def create_annotation(
     if not raw_phrase:
         raise HTTPException(status_code=404, detail="Raw phrase not found")
 
-    qa_result = QARuleEngine.validate(payload.translated_text, raw_phrase.language)
+    qa_result = QARuleEngine.validate(payload.translated_text, "english")
     if not qa_result.is_valid:
-        raise HTTPException(status_code=422, detail=qa_result.model_dump())
+        raise HTTPException(status_code=422, detail="; ".join(e.message for e in qa_result.errors))
 
     annotation = Annotation(
         raw_phrase_id=payload.raw_phrase_id,

@@ -3,6 +3,7 @@ import io
 import json
 from datetime import date, datetime
 
+from sqlalchemy import func
 from sqlalchemy.orm import Session, joinedload
 
 from app.models import Annotation, RawPhrase, User, Verification
@@ -136,7 +137,7 @@ def export_stats(db: Session) -> dict:
     )
 
     language_distribution = {}
-    for row in db.query(RawPhrase.language, db.func.count(RawPhrase.id)).group_by(RawPhrase.language).all():
+    for row in db.query(RawPhrase.language, func.count(RawPhrase.id)).group_by(RawPhrase.language).all():
         language_distribution[row[0]] = row[1]
 
     return {

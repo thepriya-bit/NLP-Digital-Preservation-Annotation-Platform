@@ -67,7 +67,7 @@ def create_raw_phrase(
 ):
     qa_result = QARuleEngine.validate(payload.phrase, payload.language)
     if not qa_result.is_valid:
-        raise HTTPException(status_code=422, detail=qa_result.model_dump())
+        raise HTTPException(status_code=422, detail="; ".join(e.message for e in qa_result.errors))
 
     raw_phrase = RawPhrase(
         language=payload.language,

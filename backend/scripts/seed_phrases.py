@@ -154,6 +154,24 @@ def seed_database():
         db.commit()
         print("Re-hashed riddhi password")
 
+    priya = db.query(User).filter(User.username == "priya").first()
+    if not priya:
+        priya = User(
+            username="priya",
+            email="priya@example.com",
+            password_hash=get_password_hash("priya123"),
+            role="verifier",
+            trust_score=0.0,
+        )
+        db.add(priya)
+        db.commit()
+        db.refresh(priya)
+        print(f"Created user priya (id={priya.id})")
+    elif not verify_password("priya123", priya.password_hash):
+        priya.password_hash = get_password_hash("priya123")
+        db.commit()
+        print("Re-hashed priya password")
+
     existing_count = db.query(RawPhrase).count()
     if existing_count >= len(ASSAMESE_PHRASES):
         print(f"Database already has {existing_count} phrases. Skipping seed.")

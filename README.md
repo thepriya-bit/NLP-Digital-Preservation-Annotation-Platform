@@ -60,6 +60,7 @@ docker compose exec backend python scripts/seed_phrases.py
 |----------|----------|------|-------------|
 | `admin` | `admin123` | admin | Full access: manage users, export data, verify |
 | `riddhi` | `riddhi123` | annotator | Submit translations and contribute phrases |
+| `priya` | `priya123` | verifier | Review and approve/reject translations |
 
 Register additional accounts at `/login` with any role (`annotator`, `verifier`, `admin`).
 
