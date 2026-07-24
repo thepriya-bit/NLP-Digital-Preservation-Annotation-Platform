@@ -28,60 +28,78 @@ An end-to-end platform for Assamese language annotation, translation, verificati
 - **Dataset Export**: CSV, JSON, and Parquet formats for AI/ML use
 - **Admin Console**: User management, orphan cleanup, platform stats
 
-## Quick Start
+## Quick Start (Docker)
 
 ### Prerequisites
 
-- Python 3.12+
-- Node.js 22+
-- PostgreSQL 15+ (or Docker)
+- Docker Desktop (Windows) or Docker Engine + Docker Compose
 
-### 1. Database Setup
+### Full-Stack Launch
 
 ```bash
-# Option A: Using Docker (recommended)
-docker compose up -d db
-
-# Option B: Local PostgreSQL
-psql -U postgres -c "CREATE DATABASE nlp_platform;"
+# Build and start all services
+docker compose up --build -d
 ```
 
-### 2. Backend Setup
+The platform is now running at:
+- **Frontend**: http://localhost:5173
+- **Backend API**: http://localhost:8000
+- **Swagger Docs**: http://localhost:8000/docs
+
+### Seed Data
+
+Populate the database with 50 Assamese phrases and default users:
 
 ```bash
-cd backend
-python -m venv .venv
-.venv\Scripts\activate      # Windows
-# source .venv/bin/activate  # macOS/Linux
-
-pip install -r requirements.txt
+docker compose exec backend python scripts/seed_phrases.py
 ```
 
-Create `backend/.env`:
+### Default Users
 
-```env
-DATABASE_URL=postgresql://postgres:postgres@localhost:5432/nlp_platform
-SECRET_KEY=generate-a-random-64-char-hex-string
-LOCAL_AUDIO_DIR=uploads/audio
-```
+| Username | Password | Role | Description |
+|----------|----------|------|-------------|
+| `admin` | `admin123` | admin | Full access: manage users, export data, verify |
+| `riddhi` | `riddhi123` | annotator | Submit translations and contribute phrases |
 
-Run migrations and seed data:
+Register additional accounts at `/login` with any role (`annotator`, `verifier`, `admin`).
+
+### Core Workflow
+
+1. **Login** at http://localhost:5173/login as `riddhi` / `riddhi123`
+2. **Translate** at `/contributor` — type English translations for Assamese phrases
+3. **Verify** at `/verify` — review and approve/reject pending translations (admin/verifier only)
+4. **Admin** at `/admin` — manage users, export verified datasets as CSV/JSON
+
+### Useful Docker Commands
 
 ```bash
-alembic upgrade head
-python scripts/seed_phrases.py
+# View live logs
+docker compose logs -f backend
+
+# Run a Python one-liner inside the backend container
+docker compose exec backend python -c "from app.models import User; ..."
+
+# Open a shell in the backend container
+docker compose exec backend sh
+
+# Check database directly
+docker compose exec db psql -U postgres -d nlp_platform
+
+# Stop services without deleting data
+docker compose down
+
+# Stop and delete database volume (fresh start)
+docker compose down -v
+
+# Rebuild after dependency changes (requirements.txt, package.json)
+docker compose up --build -d
 ```
 
-Start the server:
+### Live Reload (Development)
 
-```bash
-uvicorn app.main:app --reload
-```
+The backend code is bind-mounted and uvicorn runs with `--reload`. Any file change on your host triggers an automatic server restart — no rebuild needed.
 
-API available at: http://127.0.0.1:8000  
-Swagger docs: http://127.0.0.1:8000/docs
-
-### 3. Frontend Setup
+For frontend development with instant hot-reload, run the Vite dev server locally:
 
 ```bash
 cd frontend
@@ -89,16 +107,36 @@ npm install
 npm run dev
 ```
 
-Frontend available at: http://localhost:5173
+This starts Vite at http://localhost:5173 and proxies API calls to the Docker backend.
 
-### 4. Docker (Full Stack)
+### Local Development (Without Docker)
+
+<details>
+<summary>Click to expand</summary>
 
 ```bash
-docker compose up --build
-```
+# Prerequisites: Python 3.12+, Node.js 22+, PostgreSQL 15+
 
-- Backend: http://localhost:8000
-- Frontend: http://localhost:5173
+# Database
+psql -U postgres -c "CREATE DATABASE nlp_platform;"
+
+# Backend
+cd backend
+python -m venv .venv
+.venv\Scripts\activate      # Windows
+# source .venv/bin/activate  # macOS/Linux
+pip install -r requirements.txt
+cp .env.example .env        # configure DATABASE_URL, SECRET_KEY
+alembic upgrade head
+python scripts/seed_phrases.py
+uvicorn app.main:app --reload
+
+# Frontend (separate terminal)
+cd frontend
+npm install
+npm run dev
+```
+</details>
 
 ## Environment Variables
 
